@@ -1,0 +1,24 @@
+{
+  "name": "com.vr.template-package",
+  "version": "1.0.0",
+  "displayName": "Unity Template Tool",
+  "description": "This is an package for the Initial Unity Template Tool",
+  "unity": "6000.0",  
+  "documentationUrl": "https://github.com/RomanVitolo/RV-InitialUnityTemplatePackage",  
+  "keywords": [
+    "library",
+    "utility",
+    "template"
+  ],
+  "samples": [
+    {
+      "displayName": "Samples",
+      "description": "A specialized implementation demonstrating how to use the Object Pooling pattern for managing projectile instances.",
+      "path" : "Samples~/Demo_01"
+    }
+  ],
+  "author": {
+    "name": "Roman Vitolo",
+    "url": "https://romanvitolo.com"
+  }
+}
