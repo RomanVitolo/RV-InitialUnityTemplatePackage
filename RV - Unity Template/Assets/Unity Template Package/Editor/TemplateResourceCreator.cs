@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,13 +15,15 @@ namespace Unity_Template_Package.Editor
         {
             try
             {
-                string mainPath = Path.Combine(Application.dataPath, config.mainRoot);
+                string basePath = string.IsNullOrEmpty(config.saveLocation) ? Application.dataPath : config.saveLocation;
+                string mainPath = Path.Combine(basePath, config.mainRoot);
+        
                 if (!Directory.Exists(mainPath))
                 {
                     Directory.CreateDirectory(mainPath);
                 }
                 AssetDatabase.Refresh();
-              
+                
                 foreach (var dir in config.directories)
                 {
                     string dirFullPath = Path.Combine(mainPath, dir);
@@ -28,8 +31,9 @@ namespace Unity_Template_Package.Editor
                     {
                         Directory.CreateDirectory(dirFullPath);
                     }
+        
                     AssetDatabase.Refresh();
-                  
+                    
                     if (config.subfolders.ContainsKey(dir))
                     {
                         foreach (var subfolder in new List<string>(config.subfolders[dir]))
@@ -41,11 +45,12 @@ namespace Unity_Template_Package.Editor
                             }
                             AssetDatabase.Refresh();
                            
-                            if (config.subfolderFiles.TryGetValue(subfolder, out var subfolderFile))
+                            string subKey = $"{dir}/{subfolder}";
+                            if (config.subfolderFiles.TryGetValue(subKey, out var subfolderFile))
                             {
                                 foreach (var file in new List<string>(subfolderFile))
                                 {
-                                    string filePath = Path.Combine("Assets", config.mainRoot, dir, subfolder, file);
+                                    string filePath = Path.Combine(mainPath, dir, subfolder, file);
                                     if (!File.Exists(filePath))
                                     {
                                         CreateFile(filePath, file);
@@ -54,12 +59,12 @@ namespace Unity_Template_Package.Editor
                             }
                         }
                     }
-                   
+                    
                     if (config.dirFiles.TryGetValue(dir, out var dirFile))
                     {
                         foreach (var file in new List<string>(dirFile))
                         {
-                            string filePath = Path.Combine("Assets", config.mainRoot, dir, file);
+                            string filePath = Path.Combine(mainPath, dir, file);
                             if (!File.Exists(filePath))
                             {
                                 CreateFile(filePath, file);
@@ -67,14 +72,16 @@ namespace Unity_Template_Package.Editor
                         }
                     }
                 }
+                
                 foreach (var file in config.files)
                 {
-                    string filePath = Path.Combine("Assets", config.mainRoot, file);
+                    string filePath = Path.Combine(mainPath, file);
                     if (!File.Exists(filePath))
                     {
                         CreateFile(filePath, file);
                     }
                 }
+        
                 AssetDatabase.Refresh();
             }
             catch (Exception ex)
@@ -82,26 +89,33 @@ namespace Unity_Template_Package.Editor
                 EditorUtility.DisplayDialog("Error Creating Resources", ex.Message, "OK");
             }
         }
-
+        
         private void CreateFile(string filePath, string fileName)
         {
             try
             {
+                string directoryPath = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                    AssetDatabase.Refresh();
+                }
+        
                 if (fileName.EndsWith(".unity"))
                 {
                     CreateTemplateScene(filePath);
                 }
                 else if (fileName.EndsWith(".cs"))
                 {
-                    string className = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                    string className = Path.GetFileNameWithoutExtension(fileName);
                     string scriptContent =
-$@"using UnityEngine;
-
-public class {className} : MonoBehaviour
-{{
-    void Start() {{}}
-    void Update() {{}}
-}}";
+                        $@"using UnityEngine;
+        
+        public class {className} : MonoBehaviour
+        {{    
+            void Start() {{}}
+            void Update() {{}}
+        }}";
                     File.WriteAllText(filePath, scriptContent);
                 }
                 else if (fileName.EndsWith(".mat"))
@@ -109,12 +123,30 @@ public class {className} : MonoBehaviour
                     Material newMat = new Material(Shader.Find("Standard"));
                     AssetDatabase.CreateAsset(newMat, filePath);
                 }
+                else if (fileName.EndsWith(".asmdef"))
+                {
+                    string asmdefContent = @"{
+          ""name"": """ + Path.GetFileNameWithoutExtension(fileName) + @""",
+          ""references"": [],
+          ""includePlatforms"": [],
+          ""excludePlatforms"": [],
+          ""allowUnsafeCode"": false,
+          ""overrideReferences"": false,
+          ""precompiledReferences"": [],
+          ""autoReferenced"": true,
+          ""defineConstraints"": [],
+          ""versionDefines"": []
+        }";
+                    File.WriteAllText(filePath, asmdefContent);
+                }
                 else
                 {
                     File.WriteAllText(filePath, "");
                 }
+        
+                AssetDatabase.Refresh();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 EditorUtility.DisplayDialog("Error Creating File", $"Failed to create file '{fileName}': {ex.Message}", "OK");
             }
@@ -153,3 +185,4 @@ public class {className} : MonoBehaviour
         }
     }
 }
+#endif

@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Unity_Template_Package.Editor
 {
     [Serializable]
     public class TemplateConfiguration
     {
-        public string mainRoot = "CorePackage";
-        public List<string> directories = new List<string> { "Documentation", "Editor", "Runtime", "Samples", "Tests" };
-        public List<string> files = new List<string> { "README.md", "config.json", "notes.txt" };
+        public string mainRoot = "CoreProject";
+        public string saveLocation = "";
+        public List<string> directories = new List<string> { };
+        public List<string> files = new List<string> {  };
        
         [NonSerialized]
         public Dictionary<string, List<string>> subfolders = new Dictionary<string, List<string>>();
@@ -17,10 +17,20 @@ namespace Unity_Template_Package.Editor
         public Dictionary<string, List<string>> dirFiles = new Dictionary<string, List<string>>();
         [NonSerialized]
         public Dictionary<string, List<string>> subfolderFiles = new Dictionary<string, List<string>>();
+        
+        public void EnsureSubfolderFiles(string dirName, string subName)
+        {
+            string subKey = $"{dirName}/{subName}";
+            if (!subfolderFiles.ContainsKey(subKey))
+                subfolderFiles[subKey] = new List<string>();
+        }
        
         public List<SerializableDictionaryEntry> subfoldersEntries = new List<SerializableDictionaryEntry>();
         public List<SerializableDictionaryEntry> dirFilesEntries = new List<SerializableDictionaryEntry>();
         public List<SerializableDictionaryEntry> subfolderFilesEntries = new List<SerializableDictionaryEntry>();
+        public Dictionary<string, List<string>> nestedSubfolders = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> nestedSubfolderFiles = new Dictionary<string, List<string>>();
+
 
         public void PrepareForSerialization()
         {
@@ -46,17 +56,29 @@ namespace Unity_Template_Package.Editor
             subfolders = new Dictionary<string, List<string>>();
             foreach (var entry in subfoldersEntries)
             {
-                subfolders[entry.key] = entry.value;
+                if (directories.Contains(entry.key))
+                {
+                    subfolders[entry.key] = entry.value;
+                }
             }
+
             dirFiles = new Dictionary<string, List<string>>();
             foreach (var entry in dirFilesEntries)
             {
-                dirFiles[entry.key] = entry.value;
+                if (directories.Contains(entry.key))
+                {
+                    dirFiles[entry.key] = entry.value;
+                }
             }
+
             subfolderFiles = new Dictionary<string, List<string>>();
             foreach (var entry in subfolderFilesEntries)
             {
-                subfolderFiles[entry.key] = entry.value;
+                string[] parts = entry.key.Split('/');
+                if (parts.Length == 2 && directories.Contains(parts[0]))
+                {
+                    subfolderFiles[entry.key] = entry.value;
+                }
             }
         }
     }
