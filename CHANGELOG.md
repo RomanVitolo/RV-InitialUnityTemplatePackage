@@ -1,4 +1,7 @@
-## [1.0.3] - 2 February 2025
+[1.0.4] - 25 February 2025
+ - New package updates
+
+## [1.0.3] - 21 February 2025
  - Add new features + remove unnecessary files
 
 ## [1.0.2] - 23 February 2025
