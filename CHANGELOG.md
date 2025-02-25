@@ -1,3 +1,6 @@
+## [1.0.3] - 2 February 2025
+ - Add new features + remove unnecessary files
+
 ## [1.0.2] - 23 February 2025
  - Remove files from UPM branch
 

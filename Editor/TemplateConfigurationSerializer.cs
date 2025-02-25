@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.IO;
 using UnityEditor;
@@ -40,3 +41,4 @@ namespace Unity_Template_Package.Editor
         }
     }
 }
+#endif
