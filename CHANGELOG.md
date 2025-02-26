@@ -1,3 +1,6 @@
+## [1.0.9] - 26 February 2025
+ - TemplateToolWindow class refactor + add a new template samples
+
 ## [1.0.7] - 26 February 2025
  - Remove scene from samples UPM
 
