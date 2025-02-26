@@ -1,3 +1,6 @@
+## [1.0.8] - 26 February 2025
+ - Rename documentation folder
+
 ## [1.0.7] - 26 February 2025
  - Remove scene from samples UPM
 
