@@ -1,3 +1,6 @@
+## [1.0.7] - 26 February 2025
+ - Remove scene from samples UPM
+
 ## [1.0.6] - 26 February 2025
  - Code refactor + remove unnecessary files + Add Documentation
 
