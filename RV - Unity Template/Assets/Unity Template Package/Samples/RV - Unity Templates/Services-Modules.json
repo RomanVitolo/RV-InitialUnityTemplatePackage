@@ -2,11 +2,11 @@
     "mainRoot": "Modules",
     "saveLocation": "",
     "directories": [
+        "LoginAPI",
+        "Widgets",
         "SocialSystem",
         "Unit",
-        "Widgets",
-        "ChatAPI",
-        "LoginAPI"
+        "ChatAPI"
     ],
     "files": [
         "LICENSE.md",
@@ -81,25 +81,27 @@
         {
             "key": "Unit",
             "value": [
-                "DocumentationUnit.md",
+                "UnitDocumentation.md",
                 "README.txt"
             ]
         },
         {
             "key": "Widgets",
             "value": [
-                "WidgetsAPI-Documentation"
+                "WidgetsAPI-Documentation.md"
             ]
         },
         {
             "key": "LoginAPI",
             "value": [
-                "DocumentationLoginAPI"
+                "DocumentationLoginAPI.md"
             ]
         },
         {
             "key": "SocialSystem",
-            "value": []
+            "value": [
+                "SocialSystemDocumentation.md"
+            ]
         }
     ],
     "subfolderFilesEntries": [
