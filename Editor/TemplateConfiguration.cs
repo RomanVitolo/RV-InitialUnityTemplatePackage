@@ -56,29 +56,19 @@ namespace Unity_Template_Package.Editor
             subfolders = new Dictionary<string, List<string>>();
             foreach (var entry in subfoldersEntries)
             {
-                if (directories.Contains(entry.key))
-                {
-                    subfolders[entry.key] = entry.value;
-                }
+                subfolders[entry.key] = entry.value;
             }
 
             dirFiles = new Dictionary<string, List<string>>();
             foreach (var entry in dirFilesEntries)
             {
-                if (directories.Contains(entry.key))
-                {
-                    dirFiles[entry.key] = entry.value;
-                }
+                dirFiles[entry.key] = entry.value;
             }
 
             subfolderFiles = new Dictionary<string, List<string>>();
             foreach (var entry in subfolderFilesEntries)
             {
-                string[] parts = entry.key.Split('/');
-                if (parts.Length == 2 && directories.Contains(parts[0]))
-                {
-                    subfolderFiles[entry.key] = entry.value;
-                }
+                subfolderFiles[entry.key] = entry.value;
             }
         }
     }

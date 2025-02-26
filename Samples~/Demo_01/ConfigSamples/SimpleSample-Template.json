@@ -1,0 +1,525 @@
+{
+    "mainRoot": "SimpleProjectGame",
+    "saveLocation": "",
+    "directories": [
+        "Scripts",
+        "Plugins",
+        "Materials",
+        "Scenes",
+        "Prefabs",
+        "Art",
+        "Audio"
+    ],
+    "files": [
+        "README.txt",
+        "LICENSE.md",
+        "DOCUMENTATION.md"
+    ],
+    "subfoldersEntries": [
+        {
+            "key": "NewFolder",
+            "value": []
+        },
+        {
+            "key": "NewFolder_01",
+            "value": []
+        },
+        {
+            "key": "P",
+            "value": []
+        },
+        {
+            "key": "Pr",
+            "value": []
+        },
+        {
+            "key": "Pre",
+            "value": []
+        },
+        {
+            "key": "Pref",
+            "value": []
+        },
+        {
+            "key": "Prefa",
+            "value": []
+        },
+        {
+            "key": "Prefab",
+            "value": []
+        },
+        {
+            "key": "Prefabs",
+            "value": []
+        },
+        {
+            "key": "R",
+            "value": []
+        },
+        {
+            "key": "Ru",
+            "value": []
+        },
+        {
+            "key": "Run",
+            "value": []
+        },
+        {
+            "key": "Runt",
+            "value": []
+        },
+        {
+            "key": "Runti",
+            "value": []
+        },
+        {
+            "key": "Runtim",
+            "value": []
+        },
+        {
+            "key": "Runtime",
+            "value": []
+        },
+        {
+            "key": "S",
+            "value": []
+        },
+        {
+            "key": "Sc",
+            "value": []
+        },
+        {
+            "key": "Scr",
+            "value": []
+        },
+        {
+            "key": "Scri",
+            "value": []
+        },
+        {
+            "key": "Scrip",
+            "value": []
+        },
+        {
+            "key": "Script",
+            "value": []
+        },
+        {
+            "key": "Scripts",
+            "value": [
+                "Managers",
+                "GameUI"
+            ]
+        },
+        {
+            "key": "Sce",
+            "value": []
+        },
+        {
+            "key": "Scen",
+            "value": []
+        },
+        {
+            "key": "Scene",
+            "value": []
+        },
+        {
+            "key": "Scenes",
+            "value": []
+        },
+        {
+            "key": "A",
+            "value": []
+        },
+        {
+            "key": "Ar",
+            "value": []
+        },
+        {
+            "key": "Art",
+            "value": []
+        },
+        {
+            "key": "M",
+            "value": []
+        },
+        {
+            "key": "Ma",
+            "value": []
+        },
+        {
+            "key": "Mat",
+            "value": []
+        },
+        {
+            "key": "Mate",
+            "value": []
+        },
+        {
+            "key": "Mater",
+            "value": []
+        },
+        {
+            "key": "Materi",
+            "value": []
+        },
+        {
+            "key": "Materia",
+            "value": []
+        },
+        {
+            "key": "Material",
+            "value": []
+        },
+        {
+            "key": "Materials",
+            "value": []
+        },
+        {
+            "key": "Pl",
+            "value": []
+        },
+        {
+            "key": "Plu",
+            "value": []
+        },
+        {
+            "key": "Plug",
+            "value": []
+        },
+        {
+            "key": "Plugi",
+            "value": []
+        },
+        {
+            "key": "Plugin",
+            "value": []
+        },
+        {
+            "key": "Plugins",
+            "value": []
+        },
+        {
+            "key": "Au",
+            "value": []
+        },
+        {
+            "key": "Aud",
+            "value": []
+        },
+        {
+            "key": "Audi",
+            "value": []
+        },
+        {
+            "key": "Audio",
+            "value": []
+        },
+        {
+            "key": "",
+            "value": []
+        }
+    ],
+    "dirFilesEntries": [
+        {
+            "key": "NewFolder",
+            "value": []
+        },
+        {
+            "key": "NewFolder_01",
+            "value": []
+        },
+        {
+            "key": "P",
+            "value": []
+        },
+        {
+            "key": "Pr",
+            "value": []
+        },
+        {
+            "key": "Pre",
+            "value": []
+        },
+        {
+            "key": "Pref",
+            "value": []
+        },
+        {
+            "key": "Prefa",
+            "value": []
+        },
+        {
+            "key": "Prefab",
+            "value": []
+        },
+        {
+            "key": "Prefabs",
+            "value": []
+        },
+        {
+            "key": "R",
+            "value": []
+        },
+        {
+            "key": "Ru",
+            "value": []
+        },
+        {
+            "key": "Run",
+            "value": []
+        },
+        {
+            "key": "Runt",
+            "value": []
+        },
+        {
+            "key": "Runti",
+            "value": []
+        },
+        {
+            "key": "Runtim",
+            "value": []
+        },
+        {
+            "key": "Runtime",
+            "value": []
+        },
+        {
+            "key": "S",
+            "value": []
+        },
+        {
+            "key": "Sc",
+            "value": []
+        },
+        {
+            "key": "Scr",
+            "value": []
+        },
+        {
+            "key": "Scri",
+            "value": []
+        },
+        {
+            "key": "Scrip",
+            "value": []
+        },
+        {
+            "key": "Script",
+            "value": []
+        },
+        {
+            "key": "Scripts",
+            "value": [
+                "Documentation.txt"
+            ]
+        },
+        {
+            "key": "Sce",
+            "value": []
+        },
+        {
+            "key": "Scen",
+            "value": []
+        },
+        {
+            "key": "Scene",
+            "value": []
+        },
+        {
+            "key": "Scenes",
+            "value": [
+                "MenuScene.unity",
+                "GameScene.unity",
+                "VictoryScene.unity",
+                "GameOverScene.unity"
+            ]
+        },
+        {
+            "key": "A",
+            "value": []
+        },
+        {
+            "key": "Ar",
+            "value": []
+        },
+        {
+            "key": "Art",
+            "value": []
+        },
+        {
+            "key": "M",
+            "value": []
+        },
+        {
+            "key": "Ma",
+            "value": []
+        },
+        {
+            "key": "Mat",
+            "value": []
+        },
+        {
+            "key": "Mate",
+            "value": []
+        },
+        {
+            "key": "Mater",
+            "value": []
+        },
+        {
+            "key": "Materi",
+            "value": []
+        },
+        {
+            "key": "Materia",
+            "value": []
+        },
+        {
+            "key": "Material",
+            "value": []
+        },
+        {
+            "key": "Materials",
+            "value": [
+                "ReadMaterial.mat",
+                "BlueMaterial.mat",
+                "YellowMaterial.mat"
+            ]
+        },
+        {
+            "key": "Pl",
+            "value": []
+        },
+        {
+            "key": "Plu",
+            "value": []
+        },
+        {
+            "key": "Plug",
+            "value": []
+        },
+        {
+            "key": "Plugi",
+            "value": []
+        },
+        {
+            "key": "Plugin",
+            "value": []
+        },
+        {
+            "key": "Plugins",
+            "value": [
+                "jsonfiles.json",
+                "savesystem.json"
+            ]
+        },
+        {
+            "key": "Au",
+            "value": []
+        },
+        {
+            "key": "Aud",
+            "value": []
+        },
+        {
+            "key": "Audi",
+            "value": []
+        },
+        {
+            "key": "Audio",
+            "value": []
+        },
+        {
+            "key": "",
+            "value": []
+        }
+    ],
+    "subfolderFilesEntries": [
+        {
+            "key": "Scripts/NewSubfolder",
+            "value": []
+        },
+        {
+            "key": "Scripts/U",
+            "value": []
+        },
+        {
+            "key": "Scripts/UI",
+            "value": []
+        },
+        {
+            "key": "Scripts/",
+            "value": []
+        },
+        {
+            "key": "Scripts/G",
+            "value": []
+        },
+        {
+            "key": "Scripts/Ga",
+            "value": []
+        },
+        {
+            "key": "Scripts/Gam",
+            "value": []
+        },
+        {
+            "key": "Scripts/Game",
+            "value": []
+        },
+        {
+            "key": "Scripts/GameU",
+            "value": []
+        },
+        {
+            "key": "Scripts/GameUI",
+            "value": [
+                "GameView.cs",
+                "PlayerView.cs"
+            ]
+        },
+        {
+            "key": "Scripts/M",
+            "value": []
+        },
+        {
+            "key": "Scripts/Ma",
+            "value": []
+        },
+        {
+            "key": "Scripts/Man",
+            "value": []
+        },
+        {
+            "key": "Scripts/Mana",
+            "value": []
+        },
+        {
+            "key": "Scripts/Manag",
+            "value": []
+        },
+        {
+            "key": "Scripts/Manage",
+            "value": []
+        },
+        {
+            "key": "Scripts/Manager",
+            "value": []
+        },
+        {
+            "key": "Scripts/Managers",
+            "value": [
+                "GameManager.cs",
+                "GameEngine.cs",
+                "PlayerManager.cs",
+                "AudioManager.cs"
+            ]
+        },
+        {
+            "key": "Materials/NewSubfolder",
+            "value": []
+        }
+    ]
+}
