@@ -13,7 +13,7 @@
   "samples": [
     {
       "displayName": "Samples",
-      "description": "A specialized implementation demonstrating how to use the Object Pooling pattern for managing projectile instances.",
+      "description": "The RV Initial Unity Template Package is a Unity Editor tool designed to streamline the creation of structured template projects. It enables developers to quickly set up predefined folders, files, and configurations, ensuring a consistent project structure across different projects.",
       "path" : "Samples~/Demo_01"
     }
   ],
