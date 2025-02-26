@@ -14,14 +14,14 @@ namespace Unity_Template_Package.Editor
             GetWindow<TemplateToolWindow>("RV - Template Tool");
         }
         
-        private int selectedTab = 0;
+        private int selectedTab;
         private readonly string[] tabNames = new string[] { "Template Tool", "Preview", "Documentation" };
 
         private TemplateConfiguration templateConfig = new TemplateConfiguration();
         private Vector2 toolScrollPosition;
         private Vector2 previewScrollPosition;
         private Vector2 docScrollPosition;
-        private int selectedRootFileTypeIndex = 0;
+        private int selectedRootFileTypeIndex;
         private readonly string[] fileTypeOptions = new string[] { ".cs", ".txt", ".md", ".unity", ".json", ".mat", ".asmdef" };
 
         private readonly Dictionary<string, int> directoryFileTypeSelections = new Dictionary<string, int>();
@@ -45,13 +45,12 @@ namespace Unity_Template_Package.Editor
             {
                 directoryFileTypeSelections.TryAdd(dir, 0);
 
-                if (templateConfig.subfolders.ContainsKey(dir))
+                if (templateConfig.subfolders.TryGetValue(dir, out var subfolder))
                 {
-                    foreach (var sub in templateConfig.subfolders[dir])
+                    foreach (var sub in subfolder)
                     {
                         string subKey = $"{dir}/{sub}";
-                        if (!subfolderFileTypeSelections.ContainsKey(subKey))
-                            subfolderFileTypeSelections[subKey] = 0; 
+                        subfolderFileTypeSelections.TryAdd(subKey, 0);
                     }
                 }
             }
@@ -93,10 +92,8 @@ namespace Unity_Template_Package.Editor
         
                 GUILayout.Space(10);
                 
-                for (int i = 0; i < templateConfig.directories.Count; i++)
+                foreach (var dirName in templateConfig.directories)
                 {
-                    string dirName = templateConfig.directories[i];
-                    
                     directoryFileTypeSelections.TryAdd(dirName, 0); 
                     
                     GUILayout.Space(10);
@@ -120,20 +117,21 @@ namespace Unity_Template_Package.Editor
         
                     if (!subfoldersLists.ContainsKey(dirName))
                     {
+                        var name1 = dirName;
                         subfoldersLists[dirName] = new ReorderableList(templateConfig.subfolders[dirName], typeof(string), true, true, true, true)
                         {
-                            drawHeaderCallback = (Rect rect) =>
+                            drawHeaderCallback = (rect) =>
                             {
                                 EditorGUI.LabelField(rect, "Subfolders (Drag to Reorder)");
                             },
-                            drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                            drawElementCallback = (rect, index, _, _) =>
                             {
-                                if (index >= 0 && index < templateConfig.subfolders[dirName].Count)
+                                if (index >= 0 && index < templateConfig.subfolders[name1].Count)
                                 {
-                                    templateConfig.subfolders[dirName][index] = EditorGUI.TextField(rect, templateConfig.subfolders[dirName][index]);
+                                    templateConfig.subfolders[name1][index] = EditorGUI.TextField(rect, templateConfig.subfolders[name1][index]);
                                 }
                             },
-                            onAddCallback = (ReorderableList list) =>
+                            onAddCallback = _ =>
                             {
                                 string newSubName = GetUniqueName(templateConfig.subfolders[dirName], "NewSubfolder");
                                 templateConfig.subfolders[dirName].Add(newSubName);
@@ -159,11 +157,10 @@ namespace Unity_Template_Package.Editor
                             EditorGUILayout.LabelField("File Type:", GUILayout.Width(100));
                             GUI.color = Color.white;
                             
-                            if (!subfolderFileTypeSelections.ContainsKey(subKey))
-                                subfolderFileTypeSelections[subKey] = 0;
+                            subfolderFileTypeSelections.TryAdd(subKey, 0);
 
                             int newFileTypeIndex = EditorGUILayout.Popup(
-                                subfolderFileTypeSelections.ContainsKey(subKey) ? subfolderFileTypeSelections[subKey] : 0, 
+                                subfolderFileTypeSelections.GetValueOrDefault(subKey, 0), 
                                 fileTypeOptions, GUILayout.Width(80)
                             );
 
@@ -181,21 +178,20 @@ namespace Unity_Template_Package.Editor
                             {
                                 subfolderFilesLists[subKey] = new ReorderableList(templateConfig.subfolderFiles[subKey], typeof(string), true, true, true, true)
                                 {
-                                    drawHeaderCallback = (Rect rect) =>
+                                    drawHeaderCallback = rect =>
                                     {
                                         EditorGUI.LabelField(rect, "Files in " + subName);
                                     },
-                                    drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                                    drawElementCallback = (rect, index, _, _) =>
                                     {
                                         if (index >= 0 && index < templateConfig.subfolderFiles[subKey].Count)
                                         {
                                             templateConfig.subfolderFiles[subKey][index] = EditorGUI.TextField(rect, templateConfig.subfolderFiles[subKey][index]);
                                         }
                                     },
-                                    onAddCallback = (ReorderableList list) =>
+                                    onAddCallback = _ =>
                                     {
-                                        if (!subfolderFileTypeSelections.ContainsKey(subKey))
-                                            subfolderFileTypeSelections[subKey] = 0; 
+                                        subfolderFileTypeSelections.TryAdd(subKey, 0); 
 
                                         int fileTypeIndex = subfolderFileTypeSelections[subKey]; 
                                         string extension = fileTypeIndex >= 0 && fileTypeIndex < fileTypeOptions.Length ? fileTypeOptions[fileTypeIndex] : ".cs";
@@ -227,39 +223,36 @@ namespace Unity_Template_Package.Editor
                         directoryFileTypeSelections.TryAdd(dir, 0);
                     }
                     
-                    int currentDirIndex = i;
-                    
                     if (!subfolderFilesLists.ContainsKey(dirName))
                     {
                         subfolderFilesLists[dirName] = new ReorderableList(templateConfig.dirFiles[dirName], 
                             typeof(string), true, true, true, true)
-                    {   
-                    drawHeaderCallback = (Rect rect) =>
-                    {
-                        EditorGUI.LabelField(rect, "Files in " + dirName);
-                    },
-                    drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-                    {
-                    if (index >= 0 && index < templateConfig.dirFiles[dirName].Count)
-                    {
-                        templateConfig.dirFiles[dirName][index] = EditorGUI.TextField(rect, templateConfig.dirFiles[dirName][index]);
-                    }
-                    },
-                    onAddCallback = (ReorderableList list) =>
-                    {
-                        if (!directoryFileTypeSelections.ContainsKey(dirName))
-                            directoryFileTypeSelections[dirName] = 0;
+                        {   
+                            drawHeaderCallback = rect =>
+                            {
+                                EditorGUI.LabelField(rect, "Files in " + dirName);
+                            },
+                            drawElementCallback = (rect, index, _, _) =>
+                            {
+                                if (index >= 0 && index < templateConfig.dirFiles[dirName].Count)
+                                {
+                                    templateConfig.dirFiles[dirName][index] = EditorGUI.TextField(rect, templateConfig.dirFiles[dirName][index]);
+                                }
+                            },
+                            onAddCallback = _ =>
+                            {
+                                directoryFileTypeSelections.TryAdd(dirName, 0);
 
-                        int fileTypeIndex = directoryFileTypeSelections[dirName]; 
-                        string extension = fileTypeOptions[fileTypeIndex]; 
+                                int fileTypeIndex = directoryFileTypeSelections[dirName]; 
+                                string extension = fileTypeOptions[fileTypeIndex]; 
                         
-                        if (string.IsNullOrWhiteSpace(extension))
-                            extension = ".txt"; 
+                                if (string.IsNullOrWhiteSpace(extension))
+                                    extension = ".txt"; 
 
-                        string newFileName = GetUniqueFileName(templateConfig.dirFiles[dirName], "NewFile", extension);
-                        templateConfig.dirFiles[dirName].Add(newFileName);
-                    }
-                    };
+                                string newFileName = GetUniqueFileName(templateConfig.dirFiles[dirName], "NewFile", extension);
+                                templateConfig.dirFiles[dirName].Add(newFileName);
+                            }
+                        };
                     }
         
                     subfolderFilesLists[dirName].DoLayoutList();
@@ -281,18 +274,18 @@ namespace Unity_Template_Package.Editor
         
                 ReorderableList rootFilesList = new ReorderableList(templateConfig.files, typeof(string), true, true, true, true)
                 {
-                    drawHeaderCallback = (Rect rect) =>
+                    drawHeaderCallback = rect =>
                     {
                         EditorGUI.LabelField(rect, "Root Files");
                     },
-                    drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                    drawElementCallback = (rect, index, _, _) =>
                     {
                         if (index >= 0 && index < templateConfig.files.Count)
                         {
                             templateConfig.files[index] = EditorGUI.TextField(rect, templateConfig.files[index]);
                         }
                     },
-                    onAddCallback = (ReorderableList list) =>
+                    onAddCallback = _ =>
                     {
                         string newFileName = GetUniqueFileName(templateConfig.files, "NewFile", fileTypeOptions[selectedRootFileTypeIndex]);
                         templateConfig.files.Add(newFileName);
@@ -517,38 +510,27 @@ namespace Unity_Template_Package.Editor
 
             return newName;
         }
-
-        private int GetSubfolderFileType(string subfolderName)
-        {
-            subfolderFileTypeSelections.TryAdd(subfolderName, 0);
-            return subfolderFileTypeSelections[subfolderName];
-        }
-
-        private void SetSubfolderFileType(string subfolderName, int newValue)
-        {
-            subfolderFileTypeSelections[subfolderName] = newValue;
-        }
         
         private void InitializeUIComponents()
         {
             directoriesList = new ReorderableList(templateConfig.directories, typeof(string), true, 
                 true, true, true)
             { 
-            drawHeaderCallback = (Rect rect) =>
+            drawHeaderCallback = rect =>
             {
                 EditorGUI.LabelField(rect, "Directories (Drag to Reorder)");
             },
-            drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+            drawElementCallback = (rect, index, _, _) =>
             {
                 templateConfig.directories[index] = EditorGUI.TextField(rect, templateConfig.directories[index]);
             },
-            onAddCallback = (ReorderableList list) =>
+            onAddCallback = _ =>
             {
                 string newName = GetUniqueName(templateConfig.directories, "NewFolder");
                 templateConfig.directories.Add(newName);
                 directoryFileTypeSelections.TryAdd(newName, 0);
             },
-            onRemoveCallback = (ReorderableList list) =>
+            onRemoveCallback = list =>
             {
                 int index = list.index;
                 if (index >= 0 && index < templateConfig.directories.Count)
@@ -575,16 +557,16 @@ namespace Unity_Template_Package.Editor
                     subfoldersLists[dir] = new ReorderableList(templateConfig.subfolders[dir], typeof(string),
                         true, true, true, true)
                     {
-                        drawHeaderCallback = (Rect rect) =>
+                        drawHeaderCallback = rect =>
                         {
                             EditorGUI.LabelField(rect, "Subfolders (Drag to Reorder)");
                         },
-                        drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                        drawElementCallback = (rect, index, _, _) =>
                         {
                             templateConfig.subfolders[dir][index] = EditorGUI
                                 .TextField(rect, templateConfig.subfolders[dir][index]);
                         },
-                        onAddCallback = (ReorderableList list) =>
+                        onAddCallback = _ =>
                         {
                             string newSubName = GetUniqueName(templateConfig.subfolders[dir], "NewSubfolder");
                             templateConfig.subfolders[dir].Add(newSubName);
@@ -602,19 +584,18 @@ namespace Unity_Template_Package.Editor
                             subfolderFilesLists[subKey] = new ReorderableList(templateConfig.subfolderFiles[subKey],
                                 typeof(string), true, true, true, true)
                             {
-                                drawHeaderCallback = (Rect rect) =>
+                                drawHeaderCallback = rect =>
                                 {
                                     EditorGUI.LabelField(rect, $"Files in {sub}");
                                 },
-                                drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                                drawElementCallback = (rect, index, _, _) =>
                                 {
                                     templateConfig.subfolderFiles[subKey][index] = EditorGUI
                                         .TextField(rect, templateConfig.subfolderFiles[subKey][index]);
                                 },
-                                onAddCallback = (ReorderableList list) =>
+                                onAddCallback = _ =>
                                 {
-                                    int fileTypeIndex = subfolderFileTypeSelections.ContainsKey(subKey) ? 
-                                        subfolderFileTypeSelections[subKey] : 0;
+                                    int fileTypeIndex = subfolderFileTypeSelections.GetValueOrDefault(subKey, 0);
                                     string extension = fileTypeOptions[fileTypeIndex];
                                     string newFileName = GetUniqueFileName(templateConfig.subfolderFiles[subKey], 
                                         "NewFile", extension);
