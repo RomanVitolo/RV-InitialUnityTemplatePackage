@@ -1,3 +1,9 @@
+## [1.1.0] - 26 February 2025
+ - Added repository links for UPM branch
+ - Improved organization and readability
+ - Rename samples description
+ - Update Readme	
+
 ## [1.0.9] - 26 February 2025
  - TemplateToolWindow class refactor + add a new template samples
 
