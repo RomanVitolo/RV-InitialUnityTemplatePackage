@@ -1,0 +1,749 @@
+{
+    "mainRoot": "Modules",
+    "saveLocation": "",
+    "directories": [
+        "Unit",
+        "ChatAPI",
+        "LoginAPI",
+        "Widgets",
+        "ClanSystem"
+    ],
+    "files": [
+        "LICENSE.md",
+        "READMe.txt",
+        "Documentation.md"
+    ],
+    "subfoldersEntries": [
+        {
+            "key": "ChatAPI",
+            "value": [
+                "Runtime",
+                "Scenes",
+                "Prefabs",
+                "Tests",
+                "BackEndServices"
+            ]
+        },
+        {
+            "key": "Unit",
+            "value": [
+                "Editor",
+                "Materials",
+                "Scenes",
+                "Tests",
+                "Runtime",
+                "Prefabs",
+                "Art"
+            ]
+        },
+        {
+            "key": "Widgets",
+            "value": []
+        },
+        {
+            "key": "ClanSystem",
+            "value": []
+        },
+        {
+            "key": "LoginAPI",
+            "value": [
+                "Runtime",
+                "Prefabs",
+                "Scenes",
+                "Art",
+                "Materials",
+                "Editor",
+                "Tests",
+                "Mocks"
+            ]
+        }
+    ],
+    "dirFilesEntries": [
+        {
+            "key": "ChatAPI",
+            "value": [
+                "DocumentationChatAPI.md"
+            ]
+        },
+        {
+            "key": "Unit",
+            "value": [
+                "DocumentationUnit.md",
+                "README.txt"
+            ]
+        },
+        {
+            "key": "Widgets",
+            "value": []
+        },
+        {
+            "key": "ClanSystem",
+            "value": []
+        },
+        {
+            "key": "LoginAPI",
+            "value": [
+                "DocumentationLoginAPI"
+            ]
+        }
+    ],
+    "subfolderFilesEntries": [
+        {
+            "key": "LoginAPI/NewSubfolder",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/R",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Ru",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Run",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Runt",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Runti",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Runtim",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Runtime",
+            "value": [
+                "LoginAPI.Runtime.asmdef"
+            ]
+        },
+        {
+            "key": "LoginAPI/P",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Pr",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Pre",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Pref",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Prefa",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Prefab",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Prefabs",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/S",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Sc",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Sce",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Scen",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Scene",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Scenes",
+            "value": [
+                "LoginAPIScene.unity"
+            ]
+        },
+        {
+            "key": "LoginAPI/A",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Ar",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Art",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/M",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Ma",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mat",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mate",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mater",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Materi",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Materia",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Material",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Materials",
+            "value": [
+                "RedMaterial.mat",
+                "BlueMaterial.mat",
+                "YellowMaterial.mat"
+            ]
+        },
+        {
+            "key": "LoginAPI/T",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Te",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Tes",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Test",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Tests",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/E",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Ed",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Edi",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Edit",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Edito",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Editor",
+            "value": [
+                "LoginAPI.Editor.asmdef"
+            ]
+        },
+        {
+            "key": "LoginAPI/Mo",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Moc",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mock",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/MockU",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mocku",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mockui",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mockup",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mockups",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/MockUp",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/MockUps",
+            "value": []
+        },
+        {
+            "key": "LoginAPI/Mocks",
+            "value": [
+                "LoginMockUp.cs"
+            ]
+        },
+        {
+            "key": "ChatAPI/NewSubfolder",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/R",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Ru",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Run",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Runt",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Runti",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Runtim",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Runtime",
+            "value": [
+                "ChatAPI.Runtime.asmdef"
+            ]
+        },
+        {
+            "key": "ChatAPI/P",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Pr",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Pre",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Pref",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Prefa",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Prefab",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Prefabs",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/S",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Sc",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Sce",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Scen",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Scene",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Scenes",
+            "value": [
+                "ChatScenePlaceHolder.unity"
+            ]
+        },
+        {
+            "key": "ChatAPI/U",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/UI",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/T",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Te",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Tes",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Test",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Tests",
+            "value": [
+                "ChatAPI.Tests.asmdef"
+            ]
+        },
+        {
+            "key": "ChatAPI/",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/B",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Ba",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Bac",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Back",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackE",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEn",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEnd",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Backe",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Backen",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Backend",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/Backendd",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndS",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndSe",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndSer",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndServ",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndServi",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndServic",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndService",
+            "value": []
+        },
+        {
+            "key": "ChatAPI/BackEndServices",
+            "value": [
+                "ServiceTypeController.cs"
+            ]
+        },
+        {
+            "key": "Unit/NewSubfolder",
+            "value": []
+        },
+        {
+            "key": "Unit/NewSubfolder_01",
+            "value": []
+        },
+        {
+            "key": "Unit/NewSubfolder_02",
+            "value": []
+        },
+        {
+            "key": "Unit/NewSubfolder_03",
+            "value": []
+        },
+        {
+            "key": "Unit/R",
+            "value": []
+        },
+        {
+            "key": "Unit/Ru",
+            "value": []
+        },
+        {
+            "key": "Unit/Run",
+            "value": []
+        },
+        {
+            "key": "Unit/Runt",
+            "value": []
+        },
+        {
+            "key": "Unit/Runti",
+            "value": []
+        },
+        {
+            "key": "Unit/Runtim",
+            "value": []
+        },
+        {
+            "key": "Unit/Runtime",
+            "value": [
+                "Unit.Runtime.asmdef"
+            ]
+        },
+        {
+            "key": "Unit/A",
+            "value": []
+        },
+        {
+            "key": "Unit/As",
+            "value": []
+        },
+        {
+            "key": "Unit/Ass",
+            "value": []
+        },
+        {
+            "key": "Unit/Asse",
+            "value": []
+        },
+        {
+            "key": "Unit/Asset",
+            "value": []
+        },
+        {
+            "key": "Unit/Assets",
+            "value": []
+        },
+        {
+            "key": "Unit/",
+            "value": []
+        },
+        {
+            "key": "Unit/P",
+            "value": []
+        },
+        {
+            "key": "Unit/Pr",
+            "value": []
+        },
+        {
+            "key": "Unit/Pre",
+            "value": []
+        },
+        {
+            "key": "Unit/Pref",
+            "value": []
+        },
+        {
+            "key": "Unit/Prefa",
+            "value": []
+        },
+        {
+            "key": "Unit/Prefab",
+            "value": []
+        },
+        {
+            "key": "Unit/Prefabs",
+            "value": []
+        },
+        {
+            "key": "Unit/Ar",
+            "value": []
+        },
+        {
+            "key": "Unit/Art",
+            "value": []
+        },
+        {
+            "key": "Unit/M",
+            "value": []
+        },
+        {
+            "key": "Unit/Ma",
+            "value": []
+        },
+        {
+            "key": "Unit/Mat",
+            "value": []
+        },
+        {
+            "key": "Unit/Mate",
+            "value": []
+        },
+        {
+            "key": "Unit/Mater",
+            "value": []
+        },
+        {
+            "key": "Unit/Materi",
+            "value": []
+        },
+        {
+            "key": "Unit/Materia",
+            "value": []
+        },
+        {
+            "key": "Unit/Material",
+            "value": []
+        },
+        {
+            "key": "Unit/Materials",
+            "value": [
+                "VioletMaterial.mat",
+                "GreenMaterial.mat",
+                "BlackMaterial.mat"
+            ]
+        },
+        {
+            "key": "Unit/E",
+            "value": []
+        },
+        {
+            "key": "Unit/Ed",
+            "value": []
+        },
+        {
+            "key": "Unit/Edi",
+            "value": []
+        },
+        {
+            "key": "Unit/Edit",
+            "value": []
+        },
+        {
+            "key": "Unit/Edito",
+            "value": []
+        },
+        {
+            "key": "Unit/Editor",
+            "value": [
+                "Unit.Editor.asmdef",
+                "UnitTool.cs"
+            ]
+        },
+        {
+            "key": "Unit/T",
+            "value": []
+        },
+        {
+            "key": "Unit/Te",
+            "value": []
+        },
+        {
+            "key": "Unit/Tes",
+            "value": []
+        },
+        {
+            "key": "Unit/Test",
+            "value": []
+        },
+        {
+            "key": "Unit/Tests",
+            "value": [
+                "Unit.Tests.asmdef"
+            ]
+        },
+        {
+            "key": "Unit/S",
+            "value": []
+        },
+        {
+            "key": "Unit/Sc",
+            "value": []
+        },
+        {
+            "key": "Unit/Sce",
+            "value": []
+        },
+        {
+            "key": "Unit/Scen",
+            "value": []
+        },
+        {
+            "key": "Unit/Scene",
+            "value": []
+        },
+        {
+            "key": "Unit/Scenes",
+            "value": [
+                "UnitScenePlaceHolder.unity"
+            ]
+        }
+    ]
+}

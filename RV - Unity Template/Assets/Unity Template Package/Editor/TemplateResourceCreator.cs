@@ -120,8 +120,18 @@ namespace Unity_Template_Package.Editor
                 }
                 else if (fileName.EndsWith(".mat"))
                 {
+                    if (!filePath.StartsWith(Application.dataPath))
+                    {
+                        Debug.LogError("Materials must be saved inside the 'Assets' folder.");
+                        return;
+                    }
+                    string unityPath = "Assets" + filePath.Substring(Application.dataPath.Length);
+
+                    // Create a default material with Standard Shader
                     Material newMat = new Material(Shader.Find("Standard"));
-                    AssetDatabase.CreateAsset(newMat, filePath);
+                    AssetDatabase.CreateAsset(newMat, unityPath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
                 }
                 else if (fileName.EndsWith(".asmdef"))
                 {

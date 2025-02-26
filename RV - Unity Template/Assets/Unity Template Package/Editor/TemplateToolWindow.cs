@@ -26,13 +26,10 @@ namespace Unity_Template_Package.Editor
 
         private readonly List<int> directoryFileTypeSelections = new List<int>();
         private readonly Dictionary<string, int> subfolderFileTypeSelections = new Dictionary<string, int>();
- 
         private Dictionary<string, bool> directoryFoldouts = new Dictionary<string, bool>();
         private Dictionary<string, bool> subfolderFoldouts = new Dictionary<string, bool>();
-       
         private Dictionary<string, ReorderableList> subfoldersLists = new Dictionary<string, ReorderableList>();
         private Dictionary<string, ReorderableList> subfolderFilesLists = new Dictionary<string, ReorderableList>();
-
        
         private readonly ITemplateResourceCreator resourceCreator = new TemplateResourceCreator();
      
@@ -42,7 +39,7 @@ namespace Unity_Template_Package.Editor
         {
             InitializeUIComponents();
 
-            directoryFileTypeSelections.Clear();
+            /*directoryFileTypeSelections.Clear();
             for (int i = 0; i < templateConfig.directories.Count; i++)
                 directoryFileTypeSelections.Add(0);
 
@@ -72,7 +69,7 @@ namespace Unity_Template_Package.Editor
                         directoryFileTypeSelections.RemoveAt(index);
                     }
                 }
-            };
+            };*/
         }
 
         private void OnGUI()
@@ -174,13 +171,18 @@ namespace Unity_Template_Package.Editor
                             EditorGUILayout.BeginVertical(GUI.skin.box);
                             GUILayout.Label("Subfolder: " + subName, EditorStyles.boldLabel);
         
-                            // File Type Selection for Subfolder
                             EditorGUILayout.BeginHorizontal();
                             GUI.color = Color.yellow;
                             EditorGUILayout.LabelField("File Type:", GUILayout.Width(100));
                             GUI.color = Color.white;
-                            int newSubType = EditorGUILayout.Popup(GetSubfolderFileType(subName), fileTypeOptions, GUILayout.Width(80));
-                            SetSubfolderFileType(subName, newSubType);
+                            
+                            subfolderFileTypeSelections.TryAdd(subKey, 0);
+
+                            int selectedType = EditorGUILayout.Popup(subfolderFileTypeSelections[subKey], fileTypeOptions, GUILayout.Width(80));
+                            if (subfolderFileTypeSelections != null && selectedType != subfolderFileTypeSelections[subKey])
+                            {
+                                subfolderFileTypeSelections[subKey] = selectedType; 
+                            }
                             EditorGUILayout.EndHorizontal();
                            
                             if (!templateConfig.subfolderFiles.ContainsKey(subKey))
@@ -203,7 +205,11 @@ namespace Unity_Template_Package.Editor
                                     },
                                     onAddCallback = (ReorderableList list) =>
                                     {
-                                        string newFileName = GetUniqueFileName(templateConfig.subfolderFiles[subKey], "NewFile", fileTypeOptions[newSubType]);
+                                        if (!subfolderFileTypeSelections.ContainsKey(subKey))
+                                            subfolderFileTypeSelections[subKey] = 0;
+                                        
+                                        int fileTypeIndex = subfolderFileTypeSelections[subKey];
+                                        string newFileName = GetUniqueFileName(templateConfig.subfolderFiles[subKey], "NewFile", fileTypeOptions[fileTypeIndex]);
                                         templateConfig.subfolderFiles[subKey].Add(newFileName);
                                     }
                                 };
@@ -258,7 +264,8 @@ namespace Unity_Template_Package.Editor
         
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("Directory File Type:", GUILayout.Width(120));
-                    directoryFileTypeSelections[currentDirIndex] = EditorGUILayout.Popup(directoryFileTypeSelections[currentDirIndex], fileTypeOptions, GUILayout.Width(65));
+                    directoryFileTypeSelections[currentDirIndex] = EditorGUILayout.Popup(directoryFileTypeSelections[currentDirIndex], 
+                        fileTypeOptions, GUILayout.Width(65));
                     EditorGUILayout.EndHorizontal();
                     
                     EditorGUILayout.EndVertical(); 
@@ -358,51 +365,58 @@ namespace Unity_Template_Package.Editor
             }
         }
 
-        private void DrawPreviewTab()
+        private void DrawPreviewTab()   
         {
             previewScrollPosition = EditorGUILayout.BeginScrollView(previewScrollPosition);
             EditorGUILayout.BeginVertical(GUI.skin.box);
             GUILayout.Label("Preview", EditorStyles.boldLabel);
 
             EditorGUILayout.LabelField("Main Root: " + templateConfig.mainRoot);
+
             foreach (string dir in templateConfig.directories)
             {
                 directoryFoldouts.TryAdd(dir, true);
                 directoryFoldouts[dir] = EditorGUILayout.Foldout(directoryFoldouts[dir], "Directory: " + dir);
+        
                 if (directoryFoldouts[dir])
                 {
                     EditorGUI.indentLevel++;
-                    if (templateConfig.dirFiles.TryGetValue(dir, value: out var dirFile))
+            
+                if (templateConfig.dirFiles.TryGetValue(dir, out var dirFile))
+                {
+                    foreach (string file in dirFile)
                     {
-                        foreach (string file in dirFile)
-                        {
-                            EditorGUILayout.LabelField("File: " + file);
-                        }
+                     EditorGUILayout.LabelField("File: " + file);
                     }
-                    if (templateConfig.subfolders.TryGetValue(dir, value: out var subfolder))
+                }
+
+                if (templateConfig.subfolders.TryGetValue(dir, out var subfolders))
+                {
+                    foreach (string sub in subfolders)
                     {
-                        foreach (string sub in subfolder)
+                        string subKey = dir + "/" + sub;
+                        subfolderFoldouts.TryAdd(subKey, true);
+                        subfolderFoldouts[subKey] = EditorGUILayout.Foldout(subfolderFoldouts[subKey], "Subfolder: " + sub);
+                        
+                        if (subfolderFoldouts[subKey])
                         {
-                            string subKey = dir + "_" + sub;
-                            subfolderFoldouts.TryAdd(subKey, true);
-                            subfolderFoldouts[subKey] = EditorGUILayout.Foldout(subfolderFoldouts[subKey], "Subfolder: " + sub);
-                            if (subfolderFoldouts[subKey])
+                            EditorGUI.indentLevel++;
+                            if (templateConfig.subfolderFiles.TryGetValue(subKey, out var filesInSubfolder))
                             {
-                                EditorGUI.indentLevel++;
-                                if (templateConfig.subfolderFiles.TryGetValue(sub, value: out var file))
+                                foreach (string sfile in filesInSubfolder)
                                 {
-                                    foreach (string sfile in file)
-                                    {
-                                        EditorGUILayout.LabelField("File: " + sfile);
-                                    }
+                                 EditorGUILayout.LabelField("File: " + sfile);
                                 }
-                                EditorGUI.indentLevel--;
                             }
+                            EditorGUI.indentLevel--;
                         }
                     }
-                    EditorGUI.indentLevel--;
+                }
+
+                EditorGUI.indentLevel--;
                 }
             }
+
             if (templateConfig.files.Count > 0)
             {
                 EditorGUILayout.LabelField("Root Files:");
@@ -413,34 +427,60 @@ namespace Unity_Template_Package.Editor
                 }
                 EditorGUI.indentLevel--;
             }
+
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
         }
+
 
         private void DrawDocumentationTab()
         {
             docScrollPosition = EditorGUILayout.BeginScrollView(docScrollPosition);
             EditorGUILayout.BeginVertical(GUI.skin.box);
             GUILayout.Label("Documentation", EditorStyles.boldLabel);
+
             string documentation =
-                "This tool helps you create a predefined folder and file structure in your Unity project. Follow these steps:\n\n" +
-                "1. Set the 'Main Root Name' which will be the parent folder for your template.\n\n" +
-                "2. In the 'Directories' section, add and modify directory names. You can change the order by dragging them in the list above. " +
-                "Each directory can include its own subfolders and files. Use the '+ SubFolder' button to add subfolders and the 'Create File' button (with the dropdown for file type) to add files.\n\n" +
-                "3. In the 'Root Files' section, create files that will be placed directly under the Main Root. " +
-                "Select the desired file type from the dropdown and click 'Create File'.\n\n" +
-                "4. Click 'Create Template Resources' to generate the folders and files in your project.\n\n" +
-                "5. Save your current configuration using the 'Save Configuration' button. This exports your settings as a JSON file, " +
-                "allowing you to reload them later using the 'Load Configuration' button if changes are lost or you wish to reuse a configuration.\n\n" +
-                "About the author:\n" +
-                "Name: Roman Vitolo\n" +
-                "Web page link: https://romanvitolo.com\n" +
-                "Repository link: https://github.com/RomanVitolo\n\n" +
-                "For any doubt, error, or feedback you can contact me via email (found on my web page).";
+            "RV - Template Tool Documentation\n\n" +
+            "Overview\n" +
+            "This tool allows you to generate a structured folder and file setup for Unity projects. " +
+            "It provides a graphical interface for managing directories, subfolders, and various file types.\n\n" +
+            
+            "How to Use the Tool:**\n\n" +
+            "1. Set Up the Main Root\n" +
+            "   - Enter a name in the 'Main Root Name' field.\n\n" +
+            "2. Add & Configure Directories**\n" +
+            "   - Click the '+' button to add new directories.\n" +
+            "   - Select a **default file type** for each directory.\n" +
+            "   - Add **files inside each directory** using the 'Files in Directory' list.\n\n" +
+            "3. Manage Subfolders**\n" +
+            "   - Each directory can contain **subfolders**.\n" +
+            "   - Click the '+' button inside a directory's **Subfolders** section to create new subfolders.\n" +
+            "   - Assign a **default file type** to each subfolder.\n" +
+            "   - Add **files inside subfolders** using the 'Files in Subfolder' list.\n\n" +
+            "4. Customize File Creation**\n" +
+            "   - Select the file type before adding files to directories or subfolders.\n" +
+            "   - Supported file types: `.cs`, `.txt`, `.md`, `.unity`, `.json`, `.mat`, `.asmdef`.\n\n" +
+            "5. Save & Load Configurations**\n" +
+            "   - Use the 'Save Configuration' button to export your folder structure to a JSON file.\n" +
+            "   - Reload previous configurations using 'Load Configuration'.\n\n" +
+            "6. Generate the Template Structure**\n" +
+            "   - Click 'Create Template Resources' to generate the entire directory and file structure in Unity.\n" +
+            "   - Unity will create `.mat` files correctly using `AssetDatabase.CreateAsset()`.\n\n" +
+            "7. Preview the Folder Structure**\n" +
+            "   - Switch to the 'Preview' tab to see the hierarchy of created folders and files.\n" +
+            "   - All subfolders and files are now correctly displayed.\n\n" +
+            
+            "**Developer Info:**\n" +
+            "Author: Roman Vitolo\n" +
+            "Website: https://romanvitolo.com\n" +
+            "GitHub Repository: https://github.com/RomanVitolo\n" +
+            "For Issues & Feedback: You can contact me via email (available on my website).\n";
+
             EditorGUILayout.SelectableLabel(documentation, EditorStyles.wordWrappedLabel, GUILayout.ExpandHeight(true));
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
-        }
+}
+
         
         private string GetUniqueName(List<string> existingNames, string baseName)
         {
