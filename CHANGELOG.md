@@ -1,3 +1,6 @@
+## [1.0.6] - 26 February 2025
+ - Code refactor + remove unnecessary files + Add Documentation
+
 ## [1.0.5] - 25 February 2025
  - Add necessary meta files
 
